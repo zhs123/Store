@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.b1502.store2.R;
 import com.b1502.store2.adapter.CategoryAdapter;
@@ -40,6 +42,7 @@ public class CategoryFragment extends BaseFragment {
     private String mParam1;
     private String mParam2;
     private RecyclerView recyclerView;
+    private ImageView imageView;
 
 
     public CategoryFragment() {
@@ -80,6 +83,9 @@ public class CategoryFragment extends BaseFragment {
         View view = View.inflate(getActivity(), R.layout.fragment_category, null);
         recyclerView = (RecyclerView) view.findViewById(R.id.fragment_category_recylevi);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+
+        imageView = (ImageView) view.findViewById(R.id.fragment_category_image);
+
         return view;
     }
 
@@ -99,12 +105,17 @@ public class CategoryFragment extends BaseFragment {
 
             @Override
             public void onSuccess(String result) {//数据
-                Log.i("MainActivity", result);
-                Gson gson = new Gson();
-                CategoryBean categoryBean = gson.fromJson(result, CategoryBean.class);
-                List<CategoryBean> list = new ArrayList<CategoryBean>();
-                list.add(categoryBean);
-                recyclerView.setAdapter(new CategoryAdapter(list));
+                if (!result.equals(null)) {
+                    Log.i("MainActivity", "1scmcsndbdj" + result);
+                    Toast.makeText(getActivity(), "cdccdcdd" + result, Toast.LENGTH_SHORT).show();
+                    Gson gson = new Gson();
+                    CategoryBean categoryBean = gson.fromJson(result, CategoryBean.class);
+                    List<CategoryBean> list = new ArrayList<CategoryBean>();
+                    list.add(categoryBean);
+                    recyclerView.setAdapter(new CategoryAdapter(list));
+                } else {
+                    imageView.setVisibility(View.VISIBLE);
+                }
 
 
             }
