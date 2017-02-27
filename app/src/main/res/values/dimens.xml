@@ -4,4 +4,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="bar_height">48dp</dimen>
     <dimen name="bar_text_size">18sp</dimen>
+    <dimen name="cartxt_16">16sp</dimen>
+    <dimen name="cartxt_14">14sp</dimen>
 </resources>
