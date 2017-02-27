@@ -1,13 +1,111 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.b1502.store2.fragment.CartFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+    android:id="@+id/bottom_bar"
+    android:layout_width="match_parent"
+    android:layout_height="54dp"
+    android:layout_alignParentBottom="true"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:visibility="visible" >
+
+    <CheckBox
+        android:id="@+id/check_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="4dp"
+        android:button="@drawable/check_box_bg"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:minHeight="64dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:visibility="visible" />
+        <TextView
+            android:text="全选"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:id="@+id/cart_rl_allprie_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+      android:layout_weight="0.2"
+        android:visibility="visible" >
+        <TextView
+            android:id="@+id/tv_cart_Allprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="合计:"
+            android:textColor="@color/grey_color2"
+            android:textSize="@dimen/cartxt_14" />
+
+        <TextView
+            android:id="@+id/tv_cart_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_cart_Allprice"
+            android:singleLine="true"
+            android:text="￥0.00 "
+            android:textColor="@color/orange_color"
+            android:textSize="@dimen/cartxt_14"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
+
     <TextView
+        android:id="@+id/tv_cart_move_favorite"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:background="#EDEDED"
+        android:clickable="true"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="移人收藏夹"
+        android:textColor="@color/grey_color2"
+        android:textSize="@dimen/cartxt_16"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_cart_buy_or_del"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_weight="1"
+        android:background="@color/orange_color"
+        android:clickable="true"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="结算"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/cartxt_16" />
+</LinearLayout>
+
+    <ListView
+        android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_above="@+id/bottom_bar"
+        android:layout_marginTop="48dp"
+        android:divider="@null" />
 
-</FrameLayout>
+
+</RelativeLayout>
