@@ -2,12 +2,19 @@ package com.b1502.store2.fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.b1502.store2.R;
+import com.b1502.store2.model.StoreParams;
+import com.b1502.store2.util.UrlUtil;
+
+import org.xutils.common.Callback;
+import org.xutils.x;
 
 /**
  * 购物车
@@ -63,5 +70,39 @@ public class CartFragment extends BaseFragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_cart, container, false);
     }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getItems();
+    }
+    private void getItems() {
+        StoreParams params = new StoreParams(UrlUtil.GetItems);
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onSuccess(String result) {
+
+                Log.d(TAG, result);
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+    }
+
+
+
 
 }

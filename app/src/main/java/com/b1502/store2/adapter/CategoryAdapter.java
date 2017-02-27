@@ -9,6 +9,4 @@ package com.b1502.store2.adapter;
 
 
 public class CategoryAdapter {
-    //enen
-
 }
