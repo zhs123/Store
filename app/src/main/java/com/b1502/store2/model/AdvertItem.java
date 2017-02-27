@@ -1,5 +1,6 @@
 package com.b1502.store2.model;
 
+import com.b1502.store2.util.UrlUtil;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -25,4 +26,7 @@ public class AdvertItem {
     @SerializedName("CreateDateTime")
     public String createDateTime;
 
+    public String getImgUrl() {
+        return UrlUtil.getImageUrl(imgUrl);
+    }
 }
