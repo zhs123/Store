@@ -7,110 +7,42 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.b1502.store2.R;
 import com.b1502.store2.model.StoreParams;
+import com.b1502.store2.util.HttpUtils;
+import com.b1502.store2.util.LogUtil;
 import com.b1502.store2.util.UrlUtil;
 
 import org.xutils.common.Callback;
 import org.xutils.x;
 
 //首页
-public class HomeFragment extends BaseFragment {
-
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
-
-
-    public HomeFragment() {
-        // Required empty public constructor
-    }
-
-
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
+public class HomeFragment extends BaseFragment implements HttpUtils.RequestListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //绑定接口
+        new HttpUtils(this);
         getAdvertItems();
-        getHomeProducts(0);
-    }
-
-    private void getHomeProducts(int pageIndex) {
-        StoreParams params = new StoreParams(UrlUtil.GetHomeProducts, pageIndex);
-        x.http().get(params, new Callback.CommonCallback<String>() {
-            @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-            @Override
-            public void onSuccess(String result) {
-                Log.d(TAG, result);
-            }
-
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
-        });
+        HttpUtils.getRequestData(UrlUtil.GetAdvertItems, 0);
     }
 
     private void getAdvertItems() {
-        StoreParams params = new StoreParams(UrlUtil.GetAdvertItems);
-        x.http().get(params, new Callback.CommonCallback<String>() {
-            @Override
-            public void onCancelled(CancelledException cex) {
 
-            }
-
-            @Override
-            public void onSuccess(String result) {
-                Log.d(TAG, result);
-            }
-
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
-        });
     }
 
 
+    @Override
+    public void getData(String result) {
+        LogUtil.i("TAG", "接口回调的数据" + result.toString());
+        Toast.makeText(getContext(), "走了", Toast.LENGTH_SHORT).show();
+    }
 }
