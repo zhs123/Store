@@ -1,6 +1,6 @@
 package com.b1502.store2.util;
 /**
- * log日志工具类
+ * Log日志工具类
  */
 
 import android.util.Log;
