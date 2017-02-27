@@ -68,6 +68,4 @@ public class UrlUtil {
 
     //资讯详情
     public static final String GetNews = "/Site/Info/GetNews";
-
-
 }
