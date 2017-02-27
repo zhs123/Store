@@ -2,14 +2,27 @@ package com.b1502.store2.fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.b1502.store2.R;
+import com.b1502.store2.bean.CategoryBean;
+import com.b1502.store2.model.StoreParams;
+import com.b1502.store2.util.UrlUtil;
+import com.google.gson.Gson;
 
-/**分类
+import org.xutils.common.Callback;
+import org.xutils.x;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * 分类
  * A simple {@link Fragment} subclass.
  * Use the {@link CategoryFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -60,7 +73,45 @@ public class CategoryFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_category, container, false);
+        View view = View.inflate(getActivity(), R.layout.fragment_category, null);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.fragment_category_recylevi);
+        return view;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getCategories();
+    }
+
+    private void getCategories() {
+        StoreParams params = new StoreParams(UrlUtil.GetCategories);
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onSuccess(String result) {//数据
+//                Log.i("MainActivity", result);
+                Gson gson = new Gson();
+                CategoryBean categoryBean = gson.fromJson(result, CategoryBean.class);
+                List<CategoryBean> list = new ArrayList<CategoryBean>();
+                list.add(categoryBean);
+
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+    }
 }
