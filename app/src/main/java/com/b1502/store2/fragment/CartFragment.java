@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.b1502.store2.R;
 
 /**
+ * 购物车
  * A simple {@link Fragment} subclass.
  * Use the {@link CartFragment#newInstance} factory method to
  * create an instance of this fragment.

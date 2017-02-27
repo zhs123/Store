@@ -15,7 +15,7 @@ import com.b1502.store2.util.UrlUtil;
 import org.xutils.common.Callback;
 import org.xutils.x;
 
-
+//首页
 public class HomeFragment extends BaseFragment {
 
     private static final String ARG_PARAM1 = "param1";
