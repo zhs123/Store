@@ -1,7 +1,7 @@
 package com.b1502.store2;
 
 /**
- * 1. 配置文件
+ * 1. 配置文件，杨帆第一次提交
  * 2. @author：liqingyi
  * 3. @date：2017/2/26 13:32
  */
