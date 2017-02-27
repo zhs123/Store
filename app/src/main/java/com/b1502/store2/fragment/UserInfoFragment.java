@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.b1502.store2.R;
 
 /**
+ * 用户信息
  * A simple {@link Fragment} subclass.
  * Use the {@link UserInfoFragment#newInstance} factory method to
  * create an instance of this fragment.
