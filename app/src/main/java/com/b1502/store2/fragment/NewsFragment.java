@@ -2,6 +2,7 @@ package com.b1502.store2.fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,6 @@ import android.view.ViewGroup;
 import com.b1502.store2.R;
 
 /**
- * 微资讯
  * A simple {@link Fragment} subclass.
  * Use the {@link NewsFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -62,6 +62,16 @@ public class NewsFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_news, container, false);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getNewsList();
+    }
+
+    private void getNewsList() {
+
     }
 
 }
