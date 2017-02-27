@@ -51,5 +51,23 @@ public class UrlUtil {
     //首页产品列表
     public static final String GetHomeProducts = "/Site/Home/GetHomeProducts";
 
+    //产品信息
+    public static final String GetProduct = "/Shop/Product/GetProduct";
+
+    //分类列表
+    public static final String GetCategories = "/Shop/Product/GetCategories";
+
+    //分类信息
+    public static final String GetCategory = "/Shop/Product/GetCategory";
+
+    //购物车
+    public static final String GetItems = "/Shop/ShoppingCart/GetItems";
+
+    //微资讯
+    public static final String GetNewsList = "/Site/Info/GetNewsList";
+
+    //资讯详情
+    public static final String GetNews = "/Site/Info/GetNews";
+
 
 }
