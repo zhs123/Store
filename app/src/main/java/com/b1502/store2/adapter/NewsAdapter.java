@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.b1502.store2.R;
 import com.b1502.store2.bean.NewsBean;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -33,10 +32,6 @@ public class NewsAdapter extends BaseAdapter{
         this.context = context;
     }
 
-
-
-
-
     @Override
     public int getCount() {
 
@@ -45,12 +40,12 @@ public class NewsAdapter extends BaseAdapter{
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return namelist.get(i);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
@@ -66,13 +61,13 @@ public class NewsAdapter extends BaseAdapter{
             viewHolder  =(ViewHolder) convertView.getTag();
         }
 
-        //显示图片
+//        //显示图片
 //        DisplayImageOptions options = new DisplayImageOptions.Builder()
 //                .cacheInMemory(true)
 //                .cacheOnDisk(true)
 //                .bitmapConfig(Bitmap.Config.RGB_565)
 //                .build();
-        ImageLoader.getInstance().displayImage(namelist.get(position).getImgUrl(), viewHolder.imageView);
+//        ImageLoader.getInstance().displayImage(namelist.get(position).getImgUrl(), viewHolder.imageView,options);
         viewHolder.textView.setText(namelist.get(i).getTitle());
         return convertView;
     }

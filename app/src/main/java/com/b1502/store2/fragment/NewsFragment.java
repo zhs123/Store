@@ -2,6 +2,8 @@ package com.b1502.store2.fragment;
 
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -16,11 +18,11 @@ import com.b1502.store2.bean.NewsBean;
 import com.b1502.store2.model.StoreParams;
 import com.b1502.store2.util.UrlUtil;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.xutils.common.Callback;
 import org.xutils.x;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,6 +32,13 @@ import java.util.List;
  */
 
 public class NewsFragment extends BaseFragment {
+    Handler hander=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+        }
+    };
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -40,6 +49,8 @@ public class NewsFragment extends BaseFragment {
     private String mParam2;
     private ListView listview;
     private int i;
+    private List<NewsBean> namelist;
+
 
     public NewsFragment() {
         // Required empty public constructor
@@ -96,9 +107,9 @@ public class NewsFragment extends BaseFragment {
             public void onSuccess(String result) {
                 Log.i("MainActivity", "1scmcsndbdj" + result);
                 Gson gson=new Gson();
-                NewsBean newsbean=gson.fromJson(result,NewsBean.class);
-                List<NewsBean> namelist=new ArrayList<NewsBean>();
-                namelist.add(newsbean);
+                List<NewsBean> namelist = gson.fromJson(result, new TypeToken<List<NewsBean>>() {
+                }.getType());
+               // hander.sendEmptyMessage(0);
                 listview.setAdapter(new NewsAdapter(namelist,getActivity()));
             }
 

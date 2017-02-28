@@ -39,5 +39,5 @@ dependencies {
 //    图片加载缓存
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 //    轮播图
-
+    compile 'com.youth.banner:banner:1.4.9'
 }
