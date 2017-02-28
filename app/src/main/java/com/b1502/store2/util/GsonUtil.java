@@ -1,7 +1,10 @@
 package com.b1502.store2.util;
 
+import com.b1502.store2.model.AdvertItem;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import java.util.List;
 
 /**
  * @author JasonMiao
@@ -19,4 +22,7 @@ public final class GsonUtil {
         return mGson.toJson(src, token.getType());
     }
 
+    public static <T> List<T> parseJsonToArray(String jsonStr, TypeToken<List<T>> token) {
+        return mGson.fromJson(jsonStr, token.getType());
+    }
 }
