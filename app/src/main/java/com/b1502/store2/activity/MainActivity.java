@@ -37,6 +37,7 @@ public class MainActivity extends BaseActivity {
         storeBar.hideBackButton();
         initTab();
     }
+
     private void initTab() {
         tabHost = (StoreFragmentTabHost) findViewById(R.id.tabhost);
         tabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
