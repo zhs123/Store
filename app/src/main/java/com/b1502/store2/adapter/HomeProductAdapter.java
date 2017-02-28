@@ -19,12 +19,12 @@ import java.util.ArrayList;
 
 public class HomeProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    ArrayList<Product> list;
-    Context context;
+    private ArrayList<Product> list;
+    private Context context;
 
-    public HomeProductAdapter(Context context) {
+    public HomeProductAdapter(Context context, ArrayList<Product> list) {
         this.context = context;
-        this.list = new ArrayList<>();
+        this.list = list;
     }
 
     public void addData(ArrayList<Product> items) {
@@ -55,13 +55,14 @@ public class HomeProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
     static class ProductHolder extends RecyclerView.ViewHolder {
 
         public ProductHolder(View itemView) {
             super(itemView);
+
         }
 
     }
