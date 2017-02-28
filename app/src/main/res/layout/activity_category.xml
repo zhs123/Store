@@ -5,9 +5,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:weightSum="10"
     tools:context="com.b1502.store2.activity.CategoryActivity">
 
     <include layout="@layout/store_bar"></include>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/category_comprehensive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/comprehensive"
+            android:textColor="@color/colorred"
+            android:textSize="@dimen/bar_text_size" />
+
+        <TextView
+            android:id="@+id/category_Sales_volume"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/Sales_volume"
+            android:textSize="@dimen/bar_text_size" />
+
+        <TextView
+            android:id="@+id/category_Price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/Price"
+            android:textSize="@dimen/bar_text_size" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/grey_color3" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/category_recycle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"></android.support.v7.widget.RecyclerView>
 
 
 </LinearLayout>

@@ -6,12 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.b1502.store2.R;
 import com.b1502.store2.adapter.CategoryAdapter;
@@ -19,6 +16,7 @@ import com.b1502.store2.bean.CategoryBean;
 import com.b1502.store2.model.StoreParams;
 import com.b1502.store2.util.UrlUtil;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.xutils.common.Callback;
 import org.xutils.x;
@@ -42,7 +40,7 @@ public class CategoryFragment extends BaseFragment {
     private String mParam1;
     private String mParam2;
     private RecyclerView recyclerView;
-    private ImageView imageView;
+    private List<CategoryBean> list = new ArrayList<CategoryBean>();
 
 
     public CategoryFragment() {
@@ -82,9 +80,7 @@ public class CategoryFragment extends BaseFragment {
         // Inflate the layout for this fragment
         View view = View.inflate(getActivity(), R.layout.fragment_category, null);
         recyclerView = (RecyclerView) view.findViewById(R.id.fragment_category_recylevi);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
 
-        imageView = (ImageView) view.findViewById(R.id.fragment_category_image);
 
         return view;
     }
@@ -96,6 +92,7 @@ public class CategoryFragment extends BaseFragment {
     }
 
     private void getCategories() {
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 4));
         StoreParams params = new StoreParams(UrlUtil.GetCategories);
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
@@ -104,18 +101,13 @@ public class CategoryFragment extends BaseFragment {
             }
 
             @Override
-            public void onSuccess(String result) {//数据
-                if (!result.equals(null)) {
-                    Log.i("MainActivity", "1scmcsndbdj" + result);
-                    Toast.makeText(getActivity(), "cdccdcdd" + result, Toast.LENGTH_SHORT).show();
-                    Gson gson = new Gson();
-                    CategoryBean categoryBean = gson.fromJson(result, CategoryBean.class);
-                    List<CategoryBean> list = new ArrayList<CategoryBean>();
-                    list.add(categoryBean);
-                    recyclerView.setAdapter(new CategoryAdapter(list));
-                } else {
-                    imageView.setVisibility(View.VISIBLE);
-                }
+            public void onSuccess(String result) {//数
+
+
+                Gson gson = new Gson();
+                List<CategoryBean> list = gson.fromJson(result, new TypeToken<List<CategoryBean>>() {
+                }.getType());
+                recyclerView.setAdapter(new CategoryAdapter(list, getActivity()));
 
 
             }
