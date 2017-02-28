@@ -2,10 +2,7 @@ package com.b1502.store2.fragment;
 
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,20 +22,20 @@ import org.xutils.x;
 
 import java.util.List;
 
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link NewsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-
+/**
+*1.类的用途
+*2.zhanghaisheng
+*3.2017/2/28
+ * 资讯页面
+**/
 public class NewsFragment extends BaseFragment {
-    Handler hander=new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
 
-        }
-    };
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -101,7 +98,6 @@ public class NewsFragment extends BaseFragment {
 
     private void getNewsList() {
         StoreParams params = new StoreParams(UrlUtil.GetNewsList);
-
         x.http().get(params, new Callback.CacheCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -109,7 +105,6 @@ public class NewsFragment extends BaseFragment {
                 Gson gson=new Gson();
                 List<NewsBean> namelist = gson.fromJson(result, new TypeToken<List<NewsBean>>() {
                 }.getType());
-               // hander.sendEmptyMessage(0);
                 listview.setAdapter(new NewsAdapter(namelist,getActivity()));
             }
 
