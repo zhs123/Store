@@ -29,4 +29,15 @@ public class AdvertItem {
     public String getImgUrl() {
         return UrlUtil.getImageUrl(imgUrl);
     }
+
+    @Override
+    public String toString() {
+        return "AdvertItem{" +
+                "id='" + id + '\'' +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", linkUrl='" + linkUrl + '\'' +
+                ", applicationId='" + applicationId + '\'' +
+                ", createDateTime='" + createDateTime + '\'' +
+                '}';
+    }
 }

@@ -164,7 +164,7 @@
             android:layout_marginTop="5dp"/>
 
         <RelativeLayout
-            android:id="@+id/re1"
+            android:id="@+id/user_info_myadd"
             android:clickable="true"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -179,7 +179,7 @@
                 android:layout_marginLeft="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="我的订单"/>
+                android:text="收货地址"/>
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -194,7 +194,7 @@
             android:background="#D4D4D4"
             android:layout_height="0.1dp"/>
         <RelativeLayout
-            android:id="@+id/re2"
+            android:id="@+id/user_info_mycollect"
             android:clickable="true"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -223,7 +223,7 @@
             android:background="#D4D4D4"
             android:layout_height="0.1dp"/>
         <RelativeLayout
-            android:id="@+id/re3"
+            android:id="@+id/user_info_mypoints"
             android:clickable="true"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -253,7 +253,7 @@
             android:layout_height="0.1dp"/>
 
         <RelativeLayout
-            android:id="@+id/re4"
+            android:id="@+id/user_info_mycoupon"
             android:clickable="true"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -289,7 +289,7 @@
             android:layout_height="0.1dp"/>
 
         <RelativeLayout
-            android:id="@+id/re5"
+            android:id="@+id/user_info_accountsecurity"
             android:clickable="true"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -319,7 +319,7 @@
             android:layout_height="0.1dp"/>
 
         <RelativeLayout
-            android:id="@+id/re6"
+            android:id="@+id/user_info_quit"
             android:clickable="true"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"

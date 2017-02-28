@@ -3,4 +3,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    /* 分类列表页面*/
+    <string name="comprehensive">综合</string>
+    <string name="Sales_volume">销量</string>
+    <string name="Price">价格</string>
+    /* 分类列表页面*/
 </resources>

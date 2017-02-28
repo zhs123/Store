@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_collapseParallaxMultiplier="1.0">
+    <!-- 分类界面的第二个item布局-->
+    <ImageView
+        android:id="@+id/categorytwoitem_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/categorytwoitem_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/categorytwoitem_image"
+        android:layout_marginLeft="30dp"
+        android:text="比米诺"
+        android:textSize="@dimen/bar_text_size" />
+
+    <TextView
+        android:id="@+id/categorytwoitem_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/categorytwoitem_name"
+        android:layout_marginLeft="30dp"
+        android:text="¥ 0.01"
+        android:textColor="@color/my_money"
+        android:textSize="15sp" />
+
+</RelativeLayout>

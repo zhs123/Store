@@ -22,6 +22,16 @@ public class NewsBean {
     private String ImgUrl;
     private String CreateDateTime;
 
+    @Override
+    public String toString() {
+        return "NewsBean{" +
+                "Id='" + Id + '\'' +
+                ", Title='" + Title + '\'' +
+                ", ImgUrl='" + ImgUrl + '\'' +
+                ", CreateDateTime='" + CreateDateTime + '\'' +
+                '}';
+    }
+
     public String getId() {
         return Id;
     }
