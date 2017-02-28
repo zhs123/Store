@@ -4,17 +4,31 @@ package com.b1502.store2.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.b1502.store2.R;
+import com.b1502.store2.adapter.NewsAdapter;
+import com.b1502.store2.bean.NewsBean;
+import com.b1502.store2.model.StoreParams;
+import com.b1502.store2.util.UrlUtil;
+import com.google.gson.Gson;
+
+import org.xutils.common.Callback;
+import org.xutils.x;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link NewsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
 public class NewsFragment extends BaseFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +38,8 @@ public class NewsFragment extends BaseFragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private ListView listview;
+    private int i;
 
     public NewsFragment() {
         // Required empty public constructor
@@ -61,17 +76,54 @@ public class NewsFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news, container, false);
+        View view = View.inflate(getActivity(), R.layout.fragment_news, null);
+        listview =(ListView) view.findViewById(R.id.listview);
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         getNewsList();
     }
 
     private void getNewsList() {
+        StoreParams params = new StoreParams(UrlUtil.GetNewsList);
 
+        x.http().get(params, new Callback.CacheCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Log.i("MainActivity", "1scmcsndbdj" + result);
+                Gson gson=new Gson();
+                NewsBean newsbean=gson.fromJson(result,NewsBean.class);
+                List<NewsBean> namelist=new ArrayList<NewsBean>();
+                namelist.add(newsbean);
+                listview.setAdapter(new NewsAdapter(namelist,getActivity()));
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+
+            @Override
+            public boolean onCache(String result) {
+                return false;
+            }
+        });
     }
+
+
 
 }
