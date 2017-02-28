@@ -5,10 +5,22 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.b1502.store2.R;
+import com.b1502.store2.adapter.Cateadapter;
+import com.b1502.store2.bean.CatBean_;
+import com.b1502.store2.network.StoreParams;
+import com.b1502.store2.util.UrlUtil;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.xutils.common.Callback;
+import org.xutils.x;
+
+import java.util.List;
 
 /**
  * 分类列表页面
@@ -56,8 +68,8 @@ public class CategoryActivity extends BaseActivity implements View.OnClickListen
         String id = intent.getStringExtra("id");
         initStoreBar(name);
 
-//        getCategory("categoryId", id);
-//        getProducts(id, 0);
+        getCategory("categoryId", id);
+        getProducts(id, 0);
     }
 
     @Override
@@ -89,70 +101,71 @@ public class CategoryActivity extends BaseActivity implements View.OnClickListen
      * @param param
      * @param categoryId
      */
-//    public void getCategory(String param, String categoryId) {
-//        StoreParams params = new StoreParams(UrlUtil.GetCategory, param, categoryId);
-//        x.http().get(params, new Callback.CommonCallback<String>() {
-//            @Override
-//            public void onCancelled(CancelledException cex) {
-//
-//            }
-//
-//            @Override
-//            public void onSuccess(String result) {
-////                Log.i("MainActivity", result);
-//            }
-//
-//            @Override
-//            public void onError(Throwable ex, boolean isOnCallback) {
-//
-//            }
-//
-//            @Override
-//            public void onFinished() {
-//
-//            }
-//        });
-//    }
+    public void getCategory(String param, String categoryId) {
+        StoreParams params = new StoreParams(UrlUtil.GetCategory, param, categoryId);
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onSuccess(String result) {
+//                Log.i("MainActivity", result);
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+    }
 
     //分类界面
-//    public void getProducts(final String productCategoryId, int startRowIndex) {
-////        StoreParams params = new StoreParams(UrlUtil.GetProducts, productCategoryId, startRowIndex);
-//        x.http().get(params, new Callback.CommonCallback<String>() {
-//            @Override
-//            public void onCancelled(CancelledException cex) {
-//
-//            }
-//
-//            @Override
-//            public void onSuccess(String result) {
-//                Log.i("MainActivity", result);
-//                Gson gson = new Gson();
-//
-//                List<CatBean_> list = gson.fromJson(result, new TypeToken<List<CatBean_>>() {
-//                }.getType());
-//                for (int i = 0; i < list.size(); i++) {
-//                    List<CatBean_.ProductsEntity> products = list.get(i).getProducts();
-//                    recyclerView.setAdapter(new Cateadapter(products));
-//                }
-////                List<CatBean_.ProductsEntity> products = new ArrayList<CatBean_.ProductsEntity>();
-////                for (int i = 0; i < list.size(); i++) {
-////                    products.addAll(list.get(i).getProducts());
-////                }
-//
-//
-//            }
 
-//            @Override
-//            public void onError(Throwable ex, boolean isOnCallback) {
-//
-//            }
-//
-//            @Override
-//            public void onFinished() {
-//
-//            }
-//        });
-//    }
+    public void getProducts(final String productCategoryId, int startRowIndex) {
+        StoreParams params = new StoreParams(UrlUtil.GetProducts, productCategoryId, startRowIndex);
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onSuccess(String result) {
+                Log.i("MainActivity", result);
+                Gson gson = new Gson();
+
+                List<CatBean_> list = gson.fromJson(result, new TypeToken<List<CatBean_>>() {
+                }.getType());
+                for (int i = 0; i < list.size(); i++) {
+                    List<CatBean_.ProductsEntity> products = list.get(i).getProducts();
+                    recyclerView.setAdapter(new Cateadapter(products));
+                }
+//                List<CatBean_.ProductsEntity> products = new ArrayList<CatBean_.ProductsEntity>();
+//                for (int i = 0; i < list.size(); i++) {
+//                    products.addAll(list.get(i).getProducts());
+//                }
+
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+    }
 
 
 }
