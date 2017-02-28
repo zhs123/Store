@@ -27,7 +27,7 @@ import com.b1502.store2.activity.QuitActivity;
  * Use the {@link UserInfoFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UserInfoFragment extends BaseFragment implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
+public class UserInfoFragment extends BaseFragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -102,7 +102,10 @@ public class UserInfoFragment extends BaseFragment implements RadioGroup.OnCheck
         accountsecurity = (RelativeLayout) view.findViewById(R.id.user_info_accountsecurity);
         quit = (RelativeLayout) view.findViewById(R.id.user_info_quit);
         //点击
-        rg.setOnCheckedChangeListener(this);
+        rb_order.setOnClickListener(this);
+        rb_pay.setOnClickListener(this);
+        rb_delivery.setOnClickListener(this);
+        rb_appraise.setOnClickListener(this);
         myadd.setOnClickListener(this);
         mycollect.setOnClickListener(this);
         mycoupon.setOnClickListener(this);
@@ -115,8 +118,8 @@ public class UserInfoFragment extends BaseFragment implements RadioGroup.OnCheck
     }
 
     @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        switch (checkedId){
+    public void onClick(View v) {
+        switch (v.getId()){
             case R.id.rb_order:
                 Intent intent_order = new Intent(getActivity(), OrderActivity.class);
                 startActivity(intent_order);
@@ -133,12 +136,6 @@ public class UserInfoFragment extends BaseFragment implements RadioGroup.OnCheck
                 Intent intent_appraise = new Intent(getActivity(), AppraiseActivity.class);
                 startActivity(intent_appraise);
                 break;
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
             case R.id.user_info_myadd:
                 Intent intent_myadd = new Intent(getActivity(), AddActivity.class);
                 startActivity(intent_myadd);
