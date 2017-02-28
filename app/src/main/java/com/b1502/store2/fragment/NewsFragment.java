@@ -97,7 +97,6 @@ public class NewsFragment extends BaseFragment {
                 Log.i("MainActivity", "1scmcsndbdj" + result);
                 Gson gson=new Gson();
                 NewsBean newsbean=gson.fromJson(result,NewsBean.class);
-
                 List<NewsBean> namelist=new ArrayList<NewsBean>();
                 namelist.add(newsbean);
                 listview.setAdapter(new NewsAdapter(namelist,getActivity()));
