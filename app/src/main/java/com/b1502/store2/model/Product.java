@@ -1,5 +1,6 @@
 package com.b1502.store2.model;
 
+import com.b1502.store2.util.UrlUtil;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -40,4 +41,23 @@ public class Product {
     @SerializedName("PromotionLabel")
     public String promotionLabel;
 
+    public String getImgUrl() {
+        return UrlUtil.getImageUrl(imagePath);
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", createDateTime='" + createDateTime + '\'' +
+                ", unit='" + unit + '\'' +
+                ", productId='" + productId + '\'' +
+                ", imagePath='" + imagePath + '\'' +
+                ", memberPrice=" + memberPrice +
+                ", applicationId='" + applicationId + '\'' +
+                ", promotionLabel='" + promotionLabel + '\'' +
+                '}';
+    }
 }

@@ -11,6 +11,7 @@ import android.widget.RadioButton;
 
 import com.b1502.store2.R;
 import com.b1502.store2.model.AdvertItem;
+import com.b1502.store2.model.Product;
 import com.b1502.store2.util.GlideImageLoader;
 import com.b1502.store2.util.GsonUtil;
 import com.b1502.store2.util.HttpUtils;
@@ -68,7 +69,7 @@ public class HomeFragment extends BaseFragment implements HttpUtils.RequestListe
     private void getAdvertItems() {
         new HttpUtils(this);
         HttpUtils.getRequestData(UrlUtil.GetAdvertItems, 0);
-        HttpUtils.getRequestData(UrlUtil.GetHomeProducts, 1);
+        HttpUtils.getRequestDataOther(UrlUtil.GetHomeProducts);
     }
 
 
@@ -114,12 +115,12 @@ public class HomeFragment extends BaseFragment implements HttpUtils.RequestListe
             mBanner.setImages(mStrings);
             mBanner.start();
         }
-        if (pageIndex == 1) {
-
-        }
     }
 
     @Override
     public void getDataOther(String result) {
+        List<Product> products = GsonUtil.parseJsonToArray(result, new TypeToken<List<Product>>() {
+        });
+        LogUtil.i("TAG", "我是1" + products.toString());
     }
 }
