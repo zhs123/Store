@@ -1,3 +1,4 @@
+<!--百分比布局-->
 <com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                                      xmlns:app="http://schemas.android.com/apk/res-auto"
                                                      xmlns:tools="http://schemas.android.com/tools"
@@ -8,14 +9,78 @@
                                                      tools:context="com.b1502.store2.fragment.HomeFragment">
 
     <com.youth.banner.Banner
+        android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_heightPercent="30%"
         ></com.youth.banner.Banner>
 
+    <RadioGroup
+        android:id="@+id/home_rg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_heightPercent="15%"
+        >
+
+        <RadioButton
+            android:id="@+id/rb_collection"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/homefragment_collection"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="我的收藏"
+            android:textSize="12sp"/>
+
+        <RadioButton
+            android:id="@+id/rb_select"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/homefragment_select"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="订单查询"
+            android:textSize="12sp"/>
+
+        <RadioButton
+            android:id="@+id/rb_vip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/homefragment_vip"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="会员充值"
+            android:textSize="12sp"/>
+
+        <RadioButton
+            android:id="@+id/rb_integral"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/homefragment_integral"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="积分兑换"
+            android:textSize="12sp"/>
+    </RadioGroup>
+
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/xrecyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_heightPercent="60%"
         ></com.jcodecraeer.xrecyclerview.XRecyclerView>
 </com.zhy.android.percent.support.PercentLinearLayout>
