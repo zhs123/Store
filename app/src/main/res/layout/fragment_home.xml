@@ -7,15 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.b1502.store2.fragment.HomeFragment">
-<!--百分比布局-->
-<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                     xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                     xmlns:tools="http://schemas.android.com/tools"
-                                                     android:id="@+id/recycler_view"
-                                                     android:layout_width="match_parent"
-                                                     android:layout_height="match_parent"
-                                                     android:orientation="vertical"
-                                                     tools:context="com.b1502.store2.fragment.HomeFragment">
+    <!--百分比布局-->
 
     <com.youth.banner.Banner
         android:id="@+id/banner"
@@ -27,6 +19,7 @@
         android:id="@+id/home_rg"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/app_background"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_heightPercent="15%"
@@ -88,8 +81,9 @@
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/xrecyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></com.jcodecraeer.xrecyclerview.XRecyclerView>
+        android:layout_height="wrap_content">
         android:layout_height="0dp"
         app:layout_heightPercent="60%"
-        ></com.jcodecraeer.xrecyclerview.XRecyclerView>
+        >
+    </com.jcodecraeer.xrecyclerview.XRecyclerView>
 </com.zhy.android.percent.support.PercentLinearLayout>
