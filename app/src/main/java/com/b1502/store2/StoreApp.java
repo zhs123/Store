@@ -15,7 +15,5 @@ public class StoreApp extends Application{
     public void onCreate() {
         super.onCreate();
         x.Ext.init(this);
-
-
     }
 }
