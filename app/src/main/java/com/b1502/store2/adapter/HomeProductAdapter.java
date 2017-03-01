@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.b1502.store2.R;
@@ -54,10 +55,21 @@ public class HomeProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             productHolder.mItem_home_product_reduce.setVisibility(View.GONE);
             productHolder.mItem_home_product_given.setVisibility(View.GONE);
         } else if (list.get(position).getPromotionLabel().equals("Reduce")) {
+            productHolder.mItem_home_product_reduce.setVisibility(View.VISIBLE);
             productHolder.mItem_home_product_given.setVisibility(View.GONE);
         } else if (list.get(position).getPromotionLabel().equals("Given")) {
+            productHolder.mItem_home_product_given.setVisibility(View.VISIBLE);
             productHolder.mItem_home_product_reduce.setVisibility(View.GONE);
+        } else if (list.get(position).getPromotionLabel().equals("Given|Reduce")) {
+            productHolder.mItem_home_product_reduce.setVisibility(View.VISIBLE);
+            productHolder.mItem_home_product_given.setVisibility(View.VISIBLE);
         }
+        productHolder.mLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override
@@ -82,6 +94,7 @@ public class HomeProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         private final TextView mItem_home_product_price;
         private final TextView mItem_home_product_reduce;
         private final TextView mItem_home_product_given;
+        private final LinearLayout mLinearLayout;
 
         public ProductHolder(View itemView) {
             super(itemView);
@@ -90,6 +103,7 @@ public class HomeProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             mItem_home_product_price = (TextView) itemView.findViewById(R.id.item_home_product_price);
             mItem_home_product_reduce = (TextView) itemView.findViewById(R.id.item_home_product_reduce);
             mItem_home_product_given = (TextView) itemView.findViewById(R.id.item_home_product_given);
+            mLinearLayout = (LinearLayout) itemView.findViewById(R.id.item_home_product_linear);
         }
 
     }

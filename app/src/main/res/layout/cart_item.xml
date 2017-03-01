@@ -64,8 +64,15 @@
                     android:textSize="@dimen/cartxt_14"
                     android:textStyle="bold" />
             </RelativeLayout>
+            <ImageView
+                android:id="@+id/cart_item_delete"
+                android:src="@drawable/a1y"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+              />
             <LinearLayout
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="12dp"
                 android:layout_alignParentBottom="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
