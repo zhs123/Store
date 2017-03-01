@@ -7,7 +7,5 @@
     android:orientation="vertical"
     tools:context="com.b1502.store2.activity.PointsActivity">
 
-    <include
-        android:id="@+id/title"
-        layout="@layout/store_bar"/>
+    <include layout="@layout/store_bar"/>
 </LinearLayout>
