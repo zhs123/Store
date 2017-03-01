@@ -9,12 +9,12 @@
     tools:context="com.b1502.store2.fragment.HomeFragment">
     <!--百分比布局-->
 
-    <com.youth.banner.Banner
+   <!-- <com.youth.banner.Banner
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_heightPercent="30%"
-        android:id="@+id/banner"></com.youth.banner.Banner>
+        android:id="@+id/banner"></com.youth.banner.Banner>-->
 
     <RadioGroup
         android:id="@+id/home_rg"
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
-            android:drawableTop="@drawable/homefragment_vip"
+
             android:ellipsize="marquee"
             android:gravity="center"
             android:singleLine="true"
