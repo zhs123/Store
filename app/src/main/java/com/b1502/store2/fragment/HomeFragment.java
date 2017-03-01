@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 
 import com.b1502.store2.R;
+import com.b1502.store2.adapter.HomeProductAdapter;
 import com.b1502.store2.model.AdvertItem;
 import com.b1502.store2.model.Product;
 import com.b1502.store2.util.GlideImageLoader;
@@ -35,6 +36,7 @@ public class HomeFragment extends BaseFragment implements HttpUtils.RequestListe
     private RadioButton mRb_select;
     private RadioButton mRb_vip;
     private RadioButton mRb_integral;
+    private HomeProductAdapter mHomeProductAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -122,5 +124,7 @@ public class HomeFragment extends BaseFragment implements HttpUtils.RequestListe
         List<Product> products = GsonUtil.parseJsonToArray(result, new TypeToken<List<Product>>() {
         });
         LogUtil.i("TAG", "我是1" + products.toString());
+        mHomeProductAdapter = new HomeProductAdapter(getActivity(), products);
+        mXRecyclerView.setAdapter(mHomeProductAdapter);
     }
 }
