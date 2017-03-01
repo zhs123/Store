@@ -11,7 +11,8 @@
     <com.youth.banner.Banner
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_heightPercent="30%"></com.youth.banner.Banner>
+        app:layout_heightPercent="30%"
+        android:id="@+id/banner"></com.youth.banner.Banner>
 
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/xrecyclerview"
