@@ -160,5 +160,22 @@ public class CatBean_ {
         public void setImageUrls(List<String> ImageUrls) {
             this.ImageUrls = ImageUrls;
         }
+
+        @Override
+        public String toString() {
+            return "ProductsEntity{" +
+                    "Id='" + Id + '\'' +
+                    ", Name='" + Name + '\'' +
+                    ", Price=" + Price +
+                    ", MemberPrice=" + MemberPrice +
+                    ", Unit='" + Unit + '\'' +
+                    ", ImageUrl='" + ImageUrl + '\'' +
+                    ", ProductCategoryId='" + ProductCategoryId + '\'' +
+                    ", ProductCategoryName='" + ProductCategoryName + '\'' +
+                    ", Score=" + Score +
+                    ", PromotionLabel='" + PromotionLabel + '\'' +
+                    ", ImageUrls=" + ImageUrls +
+                    '}';
+        }
     }
 }

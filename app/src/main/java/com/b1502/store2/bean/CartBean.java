@@ -25,7 +25,7 @@ public class CartBean {
      * Remark : null
      * Score : null
      */
-    private int i;
+    private int Id2;
     private String Id;
     private String ProductId;
     private int Count;
@@ -38,6 +38,26 @@ public class CartBean {
     private boolean IsGiven;
     private Object Remark;
     private Object Score;
+    private boolean isCheck;
+
+    public int getId2() {
+        return Id2;
+    }
+
+    public void setId2(int id2) {
+        Id2 = id2;
+    }
+
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean check) {
+        isCheck = check;
+    }
+
+    public CartBean() {
+    }
 
     public CartBean(String imageUrl, String name, double price) {
         ImageUrl = imageUrl;
@@ -61,14 +81,6 @@ public class CartBean {
                 ", Remark=" + Remark +
                 ", Score=" + Score +
                 '}';
-    }
-
-    public int getI() {
-        return i;
-    }
-
-    public void setI(int i) {
-        this.i = i;
     }
 
     public void setId(String Id) {

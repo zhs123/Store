@@ -4,9 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.b1502.store2.R;
@@ -15,7 +19,6 @@ import com.b1502.store2.bean.CatBean_;
 import com.b1502.store2.network.StoreParams;
 import com.b1502.store2.util.UrlUtil;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.xutils.common.Callback;
 import org.xutils.x;
@@ -33,6 +36,7 @@ public class CategoryActivity extends BaseActivity implements View.OnClickListen
     private TextView category_sales_volume;
     private TextView category_price;
     private RecyclerView recyclerView;
+    private Cateadapter categoryAdapter;
 
     public static void open(Activity activity) {
 
@@ -55,6 +59,13 @@ public class CategoryActivity extends BaseActivity implements View.OnClickListen
         //价格
         category_price = (TextView) findViewById(R.id.category_Price);
         recyclerView = (RecyclerView) findViewById(R.id.category_recycle);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        categoryAdapter = new Cateadapter(this);
+        recyclerView.setAdapter(categoryAdapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(CategoryActivity.this, LinearLayout.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(CategoryActivity.this, LinearLayout.HORIZONTAL));
+
+
         category_comprehensive.setOnClickListener(this);
         category_sales_volume.setOnClickListener(this);
         category_price.setOnClickListener(this);
@@ -73,7 +84,7 @@ public class CategoryActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(@NonNull View v) {
         switch (v.getId()) {
             case R.id.category_comprehensive:
                 category_comprehensive.setTextColor(Color.RED);
@@ -131,6 +142,9 @@ public class CategoryActivity extends BaseActivity implements View.OnClickListen
     public void getProducts(final String productCategoryId, int startRowIndex) {
         StoreParams params = new StoreParams(UrlUtil.GetProducts, productCategoryId, startRowIndex);
         x.http().get(params, new Callback.CommonCallback<String>() {
+
+            private List<CatBean_.ProductsEntity> products;
+
             @Override
             public void onCancelled(CancelledException cex) {
 
@@ -140,13 +154,16 @@ public class CategoryActivity extends BaseActivity implements View.OnClickListen
             public void onSuccess(String result) {
                 Log.i("MainActivity", result);
                 Gson gson = new Gson();
-
-                List<CatBean_> list = gson.fromJson(result, new TypeToken<List<CatBean_>>() {
-                }.getType());
-                for (int i = 0; i < list.size(); i++) {
-                    List<CatBean_.ProductsEntity> products = list.get(i).getProducts();
-                    recyclerView.setAdapter(new Cateadapter(products));
-                }
+                CatBean_ catBean_ = gson.fromJson(result, CatBean_.class);
+                List<CatBean_.ProductsEntity> products = catBean_.getProducts();
+                Log.i("TAG", products.toString());
+//                List<CatBean_> list = gson.fromJson(result, new TypeToken<List<CatBean_>>() {
+//                }.getType());
+//                for (int i = 0; i < list.size(); i++) {
+//                    products = list.get(i).getProducts();
+//
+//                }
+                categoryAdapter.setData(products);
 //                List<CatBean_.ProductsEntity> products = new ArrayList<CatBean_.ProductsEntity>();
 //                for (int i = 0; i < list.size(); i++) {
 //                    products.addAll(list.get(i).getProducts());
