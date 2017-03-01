@@ -10,12 +10,15 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 
 import com.b1502.store2.R;
+import com.b1502.store2.adapter.HomeProductAdapter;
 import com.b1502.store2.model.AdvertItem;
+import com.b1502.store2.model.Product;
 import com.b1502.store2.util.GlideImageLoader;
 import com.b1502.store2.util.GsonUtil;
 import com.b1502.store2.util.HttpUtils;
 import com.b1502.store2.util.LogUtil;
 import com.b1502.store2.util.UrlUtil;
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.youth.banner.Banner;
@@ -34,6 +37,7 @@ public class HomeFragment extends BaseFragment implements HttpUtils.RequestListe
     private RadioButton mRb_select;
     private RadioButton mRb_vip;
     private RadioButton mRb_integral;
+    private HomeProductAdapter mHomeProductAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,9 +49,8 @@ public class HomeFragment extends BaseFragment implements HttpUtils.RequestListe
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //绑定接口
-        getAdvertItems();
         initViews();
+        getAdvertItems();
     }
 
     //初始化控件
@@ -67,8 +70,8 @@ public class HomeFragment extends BaseFragment implements HttpUtils.RequestListe
 
     private void getAdvertItems() {
         new HttpUtils(this);
-        HttpUtils.getRequestData(UrlUtil.GetAdvertItems, 0);
-        HttpUtils.getRequestData(UrlUtil.GetHomeProducts, 1);
+        HttpUtils.getRequestData(UrlUtil.GetHomeProducts, 0);
+        HttpUtils.getRequestDataOther(UrlUtil.GetAdvertItems);
     }
 
 
@@ -98,28 +101,29 @@ public class HomeFragment extends BaseFragment implements HttpUtils.RequestListe
 
     @Override
     public void getData(String result, int pageIndex) {
-        if (pageIndex == 0) {
-            mStrings = new ArrayList<>();
-            List<AdvertItem> advertItems = GsonUtil.parseJsonToArray(result, new TypeToken<List<AdvertItem>>() {
-            });
-            LogUtil.i("TAG", "接口回调的数据" + advertItems.toString());
-            for (int i = 0; i < advertItems.size(); i++) {
-                String imgUrl = advertItems.get(i).getImgUrl();
-                LogUtil.i("TAG", "解析的图片路径" + imgUrl);
-                mStrings.add(imgUrl);
-            }
-            //图片加载器
-            mBanner.setImageLoader(new GlideImageLoader());
-            //修改图片集合
-            mBanner.setImages(mStrings);
-            mBanner.start();
-        }
-        if (pageIndex == 1) {
-
-        }
+        LogUtil.i("TAG", "郭传沛接收到的回传数据" + result);
+        List<Product> products = GsonUtil.parseJsonToArray(result, new TypeToken<List<Product>>() {
+        });
+        LogUtil.i("TAG", "郭传沛" + products.toString());
+        mHomeProductAdapter = new HomeProductAdapter(getActivity(), products);
+        mXRecyclerView.setAdapter(mHomeProductAdapter);
     }
 
     @Override
     public void getDataOther(String result) {
+        mStrings = new ArrayList<>();
+        List<AdvertItem> advertItems = GsonUtil.parseJsonToArray(result, new TypeToken<List<AdvertItem>>() {
+        });
+        LogUtil.i("TAG", "接口回调的数据" + advertItems.toString());
+        for (int i = 0; i < advertItems.size(); i++) {
+            String imgUrl = advertItems.get(i).getImgUrl();
+            LogUtil.i("TAG", "解析的图片路径" + imgUrl);
+            mStrings.add(imgUrl);
+        }
+        //图片加载器
+        mBanner.setImageLoader(new GlideImageLoader());
+        //修改图片集合
+        mBanner.setImages(mStrings);
+        mBanner.start();
     }
 }

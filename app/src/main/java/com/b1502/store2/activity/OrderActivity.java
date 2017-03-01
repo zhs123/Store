@@ -5,6 +5,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.b1502.store2.R;
@@ -12,8 +13,6 @@ import com.b1502.store2.adapter.Tab_Adapter;
 import com.b1502.store2.fragment.MyTabFragment;
 
 import java.util.ArrayList;
-
-import static android.support.design.widget.TabLayout.MODE_SCROLLABLE;
 
 public class OrderActivity extends AppCompatActivity {
 
@@ -33,6 +32,17 @@ public class OrderActivity extends AppCompatActivity {
         order_vp = (ViewPager) findViewById(R.id.order_vp);
         initData();
         initView();
+
+        OnClickListener();
+    }
+
+    private void OnClickListener() {
+        order_return.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void initData() {
@@ -51,7 +61,7 @@ public class OrderActivity extends AppCompatActivity {
             order_vp.setOffscreenPageLimit(3);
             order_vp.setAdapter(mAdapter);
 
-            order_tab.setTabMode(MODE_SCROLLABLE);
+            order_tab.setTabMode(TabLayout.MODE_FIXED);
             //与viewpager关联起来
             order_tab.setupWithViewPager(order_vp);
     }
