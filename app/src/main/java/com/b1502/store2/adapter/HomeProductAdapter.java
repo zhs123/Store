@@ -47,16 +47,16 @@ public class HomeProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ProductHolder productHolder = (ProductHolder) holder;
-        ((ProductHolder) holder).mItem_home_product_name.setText(list.get(position).name);
-        ((ProductHolder) holder).mItem_home_product_price.setText(list.get(position).price);
-        mImageLoader.displayImage(list.get(position).getImgUrl(), ((ProductHolder) holder).mItem_home_product_image);
-        if (list.get(position).promotionLabel.equals("")) {
-            ((ProductHolder) holder).mItem_home_product_reduce.setVisibility(View.GONE);
-            ((ProductHolder) holder).mItem_home_product_given.setVisibility(View.GONE);
-        } else if (list.get(position).promotionLabel.equals("Reduce")) {
-            ((ProductHolder) holder).mItem_home_product_given.setVisibility(View.GONE);
-        } else if (list.get(position).promotionLabel.equals("Given")) {
-            ((ProductHolder) holder).mItem_home_product_reduce.setVisibility(View.GONE);
+        productHolder.mItem_home_product_name.setText(list.get(position).getName());
+        productHolder.mItem_home_product_price.setText("¥" + list.get(position).getPrice() + "");
+        mImageLoader.displayImage(list.get(position).getImgUrl(), productHolder.mItem_home_product_image);
+        if (list.get(position).getPromotionLabel().equals("")) {
+            productHolder.mItem_home_product_reduce.setVisibility(View.GONE);
+            productHolder.mItem_home_product_given.setVisibility(View.GONE);
+        } else if (list.get(position).getPromotionLabel().equals("Reduce")) {
+            productHolder.mItem_home_product_given.setVisibility(View.GONE);
+        } else if (list.get(position).getPromotionLabel().equals("Given")) {
+            productHolder.mItem_home_product_reduce.setVisibility(View.GONE);
         }
     }
 

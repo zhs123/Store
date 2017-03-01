@@ -3,7 +3,6 @@ package com.b1502.store2.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,20 +15,27 @@ import com.b1502.store2.bean.NewsBean;
 import com.b1502.store2.model.StoreParams;
 import com.b1502.store2.util.UrlUtil;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.xutils.common.Callback;
 import org.xutils.x;
 
-import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link NewsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-
+/**
+*1.类的用途
+*2.zhanghaisheng
+*3.2017/2/28
+ * 资讯页面
+**/
 public class NewsFragment extends BaseFragment {
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -40,6 +46,8 @@ public class NewsFragment extends BaseFragment {
     private String mParam2;
     private ListView listview;
     private int i;
+    private List<NewsBean> namelist;
+
 
     public NewsFragment() {
         // Required empty public constructor
@@ -90,15 +98,13 @@ public class NewsFragment extends BaseFragment {
 
     private void getNewsList() {
         StoreParams params = new StoreParams(UrlUtil.GetNewsList);
-
         x.http().get(params, new Callback.CacheCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 Log.i("MainActivity", "1scmcsndbdj" + result);
                 Gson gson=new Gson();
-                NewsBean newsbean=gson.fromJson(result,NewsBean.class);
-                List<NewsBean> namelist=new ArrayList<NewsBean>();
-                namelist.add(newsbean);
+                List<NewsBean> namelist = gson.fromJson(result, new TypeToken<List<NewsBean>>() {
+                }.getType());
                 listview.setAdapter(new NewsAdapter(namelist,getActivity()));
             }
 
