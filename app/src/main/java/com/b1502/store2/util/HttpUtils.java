@@ -22,7 +22,7 @@ public class HttpUtils {
     }
 
     //首页网络请求所用方法
-    public static void getRequestData(String path, int pageIndex) {
+    public static void getRequestData(String path, final int pageIndex) {
         StoreParams params = new StoreParams(path, pageIndex);
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
@@ -32,8 +32,8 @@ public class HttpUtils {
 
             @Override
             public void onSuccess(String result) {
-                LogUtil.i("TAG", result.toString());
-                mRequestListener.getData(result);
+                LogUtil.i("TAG", "郭传沛解析的数据" + result.toString());
+                mRequestListener.getData(result, pageIndex);
             }
 
             @Override
@@ -60,7 +60,7 @@ public class HttpUtils {
             @Override
             public void onSuccess(String result) {
                 LogUtil.i("TAG", result.toString());
-                mRequestListener.getData(result);
+                mRequestListener.getDataOther(result);
             }
 
             @Override
@@ -76,6 +76,8 @@ public class HttpUtils {
     }
 
     public interface RequestListener {
-        void getData(String result);
+        void getData(String result, int pageIndex);
+
+        void getDataOther(String result);
     }
 }

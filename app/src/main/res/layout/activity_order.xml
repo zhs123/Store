@@ -1,16 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_order"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.b1502.store2.activity.OrderActivity">
 
-    <TextView
-        android:id="@+id/order_name"
-        android:text="我的订单"
-        android:gravity="center"
+    <LinearLayout
+        android:id="@+id/order_line"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="0dp"
+        app:layout_heightPercent="10%"
+        android:background="@color/colorPrimaryDark">
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/order_return"
+            android:src="@drawable/btnback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/order_name"
+            android:text="我的订单"
+            android:textSize="20sp"
+            android:textColor="@color/app_background"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"/>
+
+    </LinearLayout>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/order_tab"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_heightPercent="10%"
+        android:layout_marginTop="5dp"
+        app:tabGravity="fill"
+        app:tabSelectedTextColor="@color/colorPrimary"
+        app:tabTextColor="@color/grey_color2">
+
+    </android.support.design.widget.TabLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/order_vp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_heightPercent="80%">
+
+    </android.support.v4.view.ViewPager>
+
+</com.zhy.android.percent.support.PercentLinearLayout>

@@ -109,7 +109,6 @@ public class CategoryFragment extends BaseFragment {
                 }.getType());
                 recyclerView.setAdapter(new CategoryAdapter(list, getActivity()));
 
-
             }
 
             @Override

@@ -3,53 +3,127 @@ package com.b1502.store2.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
 
 import com.b1502.store2.R;
+import com.b1502.store2.adapter.HomeProductAdapter;
 import com.b1502.store2.model.AdvertItem;
+import com.b1502.store2.model.Product;
+import com.b1502.store2.util.GlideImageLoader;
 import com.b1502.store2.util.GsonUtil;
 import com.b1502.store2.util.HttpUtils;
 import com.b1502.store2.util.LogUtil;
 import com.b1502.store2.util.UrlUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
+import com.youth.banner.Banner;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 //首页
-public class HomeFragment extends BaseFragment implements HttpUtils.RequestListener {
-
-    private Gson mGson;
+public class HomeFragment extends BaseFragment implements HttpUtils.RequestListener, View.OnClickListener {
+    private List<String> mStrings;
+    private View mView;
+    private Banner mBanner;
+    private XRecyclerView mXRecyclerView;
+    private RadioButton mRb_collection;
+    private RadioButton mRb_select;
+    private RadioButton mRb_vip;
+    private RadioButton mRb_integral;
+    private HomeProductAdapter mHomeProductAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        mView = inflater.inflate(R.layout.fragment_home, container, false);
+        return mView;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        String imageUrl = UrlUtil.getImageUrl("/Images/AD/676e9491b6ae40a0baffafa0abd80d34_720_322.jpg");
-        LogUtil.i("TAG", "图片路径" + imageUrl);
-        //绑定接口
+        initViews();
         getAdvertItems();
+    }
+
+    //初始化控件
+    private void initViews() {
+        mBanner = (Banner) mView.findViewById(R.id.banner);
+        mXRecyclerView = (XRecyclerView) mView.findViewById(R.id.xrecyclerview);
+        mXRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        mRb_collection = (RadioButton) mView.findViewById(R.id.rb_collection);
+        mRb_select = (RadioButton) mView.findViewById(R.id.rb_select);
+        mRb_vip = (RadioButton) mView.findViewById(R.id.rb_vip);
+        mRb_integral = (RadioButton) mView.findViewById(R.id.rb_integral);
+        mRb_collection.setOnClickListener(this);
+        mRb_select.setOnClickListener(this);
+        mRb_vip.setOnClickListener(this);
+        mRb_integral.setOnClickListener(this);
     }
 
     private void getAdvertItems() {
         new HttpUtils(this);
-        HttpUtils.getRequestData(UrlUtil.GetAdvertItems, 0);
+        HttpUtils.getRequestData(UrlUtil.GetHomeProducts, 0);
+        HttpUtils.getRequestDataOther(UrlUtil.GetAdvertItems);
     }
 
 
     @Override
-    public void getData(String result) {
-        LogUtil.i("TAG", "接口回调的数据" + result.toString());
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.rb_collection:
+                //我的收藏
+
+                break;
+            case R.id.rb_select:
+                //订单查询
+
+                break;
+            case R.id.rb_vip:
+                //会员充值
+
+                break;
+            case R.id.rb_integral:
+                //积分兑换
+
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void getData(String result, int pageIndex) {
+        LogUtil.i("TAG", "郭传沛接收到的回传数据" + result);
+        List<Product> products = GsonUtil.parseJsonToArray(result, new TypeToken<List<Product>>() {
+        });
+        LogUtil.i("TAG", "郭传沛" + products.toString());
+        mHomeProductAdapter = new HomeProductAdapter(getActivity(), products);
+        mXRecyclerView.setAdapter(mHomeProductAdapter);
+    }
+
+    @Override
+    public void getDataOther(String result) {
+        mStrings = new ArrayList<>();
         List<AdvertItem> advertItems = GsonUtil.parseJsonToArray(result, new TypeToken<List<AdvertItem>>() {
         });
-        LogUtil.i("TAG", "哈哈哈" + advertItems.toString());
+        LogUtil.i("TAG", "接口回调的数据" + advertItems.toString());
+        for (int i = 0; i < advertItems.size(); i++) {
+            String imgUrl = advertItems.get(i).getImgUrl();
+            LogUtil.i("TAG", "解析的图片路径" + imgUrl);
+            mStrings.add(imgUrl);
+        }
+        //图片加载器
+        mBanner.setImageLoader(new GlideImageLoader());
+        //修改图片集合
+        mBanner.setImages(mStrings);
+        mBanner.start();
     }
 }
