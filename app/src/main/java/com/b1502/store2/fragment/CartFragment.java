@@ -1,5 +1,6 @@
 package com.b1502.store2.fragment;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,11 +17,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.b1502.store2.R;
+import com.b1502.store2.activity.ConfirmorderActivity;
 import com.b1502.store2.bean.CartBean;
 import com.b1502.store2.model.StoreParams;
 import com.b1502.store2.util.ImageLoader;
+import com.b1502.store2.util.LogUtil;
 import com.b1502.store2.util.UrlUtil;
 import com.google.gson.Gson;
 
@@ -41,7 +45,7 @@ import static com.b1502.store2.R.id.check_box;
  * Use the {@link CartFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CartFragment extends BaseFragment implements CompoundButton.OnCheckedChangeListener{
+public class CartFragment extends BaseFragment implements CompoundButton.OnCheckedChangeListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -62,9 +66,9 @@ public class CartFragment extends BaseFragment implements CompoundButton.OnCheck
     private List<CartBean> bean;
     private LinearLayout bottom_bar;
     private TextView cartTextview;
-    private double totalprice=0.00;
-    private List<CartBean> list=new ArrayList<>();
-    private int totalnum=1;
+    private double totalprice = 0.00;
+    private List<CartBean> list = new ArrayList<>();
+    private int totalnum = 1;
 
     public CartFragment() {
         // Required empty public constructor
@@ -119,16 +123,18 @@ public class CartFragment extends BaseFragment implements CompoundButton.OnCheck
 
 
     }
+
     //适配数据并且刷新listview
     private void refreshListView() {
         if (cartAdapter == null) {
             cartAdapter = new CartAdapter();
             cartlistView.setAdapter(cartAdapter);
-         cartlistView.setOnItemClickListener(cartAdapter);
+            cartlistView.setOnItemClickListener(cartAdapter);
         } else {
             cartAdapter.notifyDataSetChanged();
         }
     }
+
     private void getItems() {
         StoreParams params = new StoreParams(UrlUtil.GetItems);
         x.http().get(params, new Callback.CommonCallback<String>() {
@@ -141,8 +147,11 @@ public class CartFragment extends BaseFragment implements CompoundButton.OnCheck
             public void onSuccess(String result) {
                 Gson gson = new Gson();
                 cartBeen = gson.fromJson(result, CartBean[].class);
-
-              if (CartFragment.this.cartBeen.length != 0 && CartFragment.this.cartBeen.length > 0) {
+                for(int i=0;i<cartBeen.length;i++){
+                    list.add(cartBeen[i]);
+                }
+                LogUtil.d("djn",list.toString());
+                if (CartFragment.this.cartBeen.length != 0 && CartFragment.this.cartBeen.length > 0) {
                     bottom_bar.setVisibility(View.VISIBLE);
                     cartTextview.setVisibility(View.GONE);
                     cartlistView.setVisibility(View.VISIBLE);
@@ -152,6 +161,7 @@ public class CartFragment extends BaseFragment implements CompoundButton.OnCheck
                 }
                 refreshListView();
             }
+
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
 
@@ -166,14 +176,14 @@ public class CartFragment extends BaseFragment implements CompoundButton.OnCheck
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if(isChecked){
-            for(int i=0;i<cartBeen.length;i++){
+        if (isChecked) {
+            for (int i = 0; i < cartBeen.length; i++) {
                 cartBeen[i].setCheck(isChecked);
             }
             refreshListView();
             setPrice();
-        }else{
-            for(int i=0;i<cartBeen.length;i++){
+        } else {
+            for (int i = 0; i < cartBeen.length; i++) {
                 cartBeen[i].setCheck(isChecked);
             }
             refreshListView();
@@ -210,6 +220,7 @@ public class CartFragment extends BaseFragment implements CompoundButton.OnCheck
                 holder.cart_item_name = (TextView) view.findViewById(cart_item_name);
                 holder.cart_item_price = (TextView) view.findViewById(cart_item_price);
                 holder.checkbox = (CheckBox) view.findViewById(R.id.cart_item_checkbox);
+                holder.imageView2= (ImageView) view.findViewById(R.id.cart_item_delete);
                 holder.add = (TextView) view.findViewById(R.id.tv_add);
                 holder.reduce = (TextView) view.findViewById(R.id.tv_reduce);
                 holder.num = (TextView) view.findViewById(R.id.tv_num);
@@ -220,8 +231,8 @@ public class CartFragment extends BaseFragment implements CompoundButton.OnCheck
             final CartBean cartBean = cartBeen[position];
             holder.cart_item_name.setText(cartBean.getName());
             holder.cart_item_price.setText("￥" + cartBean.getPrice() + "");
-            ImageLoader imageLoader=new ImageLoader(getActivity(),"text8");
-            holder.num.setText(cartBean.getCount()+"");
+            ImageLoader imageLoader = new ImageLoader(getActivity(), "text8");
+            holder.num.setText(cartBean.getCount() + "");
             final MyViewHolder finalHolder = holder;
             imageLoader.loadImage(UrlUtil.getImageUrl(cartBean.getImageUrl()), new ImageLoader.ImageLoadListener() {
                 @Override
@@ -230,6 +241,21 @@ public class CartFragment extends BaseFragment implements CompoundButton.OnCheck
                 }
             });
             holder.checkbox.setChecked(cartBean.isCheck());
+            holder.num.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getActivity(), ConfirmorderActivity.class));
+                }
+            });
+            holder.imageView2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getActivity(),"点击了删除",Toast.LENGTH_SHORT).show();
+
+                    list.remove(position);
+                    notifyDataSetChanged();
+                }
+            });
             holder.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -246,7 +272,7 @@ public class CartFragment extends BaseFragment implements CompoundButton.OnCheck
             holder.add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    cartBean.setCount(cartBean.getCount()+1);
+                    cartBean.setCount(cartBean.getCount() + 1);
                     notifyDataSetChanged();
                     setPrice();
                 }
@@ -254,10 +280,10 @@ public class CartFragment extends BaseFragment implements CompoundButton.OnCheck
             holder.reduce.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(cartBean.getCount()<2){
+                    if (cartBean.getCount() < 2) {
                         return;
                     }
-                    cartBean.setCount(cartBean.getCount()-1);
+                    cartBean.setCount(cartBean.getCount() - 1);
                     notifyDataSetChanged();
                     setPrice();
                 }
@@ -265,12 +291,13 @@ public class CartFragment extends BaseFragment implements CompoundButton.OnCheck
             return view;
         }
 
-       @Override
+        @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         }
+
         class MyViewHolder {
-            ImageView imageView;
+            ImageView imageView,imageView2;
             TextView cart_item_name;
             TextView cart_item_price;
             CheckBox checkbox;
@@ -280,13 +307,14 @@ public class CartFragment extends BaseFragment implements CompoundButton.OnCheck
         }
 
     }
-    public void setPrice(){
-        totalprice=0.00;
-        totalnum=0;
-        for(int i=0;i<cartBeen.length;i++){
-            if(cartBeen[i].isCheck()){
-                totalnum = totalnum+cartBeen[i].getCount();
-                totalprice+=cartBeen[i].getPrice()*cartBeen[i].getCount();
+
+    public void setPrice() {
+        totalprice = 0.00;
+        totalnum = 0;
+        for (int i = 0; i < cartBeen.length; i++) {
+            if (cartBeen[i].isCheck()) {
+                totalnum = totalnum + cartBeen[i].getCount();
+                totalprice += cartBeen[i].getPrice() * cartBeen[i].getCount();
             }
         }
         cart_jiesuan.setText("结算" + "(" + totalnum + ")");
