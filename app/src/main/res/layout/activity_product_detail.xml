@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_product_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
+    tools:context="com.b1502.store2.activity.ProductDetailActivity">
+
+    <include
+        android:id="@+id/product_bar"
+        layout="@layout/store_bar" />
+
+    <cn.bleu.widget.slidedetails.SlideDetailsLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        app:default_panel="front"
+        app:duration="300"
+        app:percent="0.4">
+        <!--上半部-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/product_recycle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+        <!--下半部-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/product_information"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+    </cn.bleu.widget.slidedetails.SlideDetailsLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/product_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="数量"
+            android:textSize="@dimen/bar_text_size" />
+
+        <TextView
+            android:id="@+id/product_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="加入购物车"
+            android:textSize="@dimen/bar_text_size" />
+    </RelativeLayout>
+
+
+</LinearLayout>
