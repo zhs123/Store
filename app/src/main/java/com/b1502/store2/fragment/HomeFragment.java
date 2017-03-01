@@ -3,16 +3,20 @@ package com.b1502.store2.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 import com.b1502.store2.R;
 import com.b1502.store2.adapter.HomeProductAdapter;
 import com.b1502.store2.model.AdvertItem;
 import com.b1502.store2.model.Product;
+import com.b1502.store2.util.DividerGridItemDecoration;
 import com.b1502.store2.util.GlideImageLoader;
 import com.b1502.store2.util.GsonUtil;
 import com.b1502.store2.util.HttpUtils;
@@ -58,6 +62,7 @@ public class HomeFragment extends BaseFragment implements HttpUtils.RequestListe
         mBanner = (Banner) mView.findViewById(R.id.banner);
         mXRecyclerView = (XRecyclerView) mView.findViewById(R.id.xrecyclerview);
         mXRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        mXRecyclerView.addItemDecoration(new DividerGridItemDecoration(getActivity()));
         mRb_collection = (RadioButton) mView.findViewById(R.id.rb_collection);
         mRb_select = (RadioButton) mView.findViewById(R.id.rb_select);
         mRb_vip = (RadioButton) mView.findViewById(R.id.rb_vip);
