@@ -32,7 +32,7 @@ public class HttpUtils {
 
             @Override
             public void onSuccess(String result) {
-                LogUtil.i("TAG", result.toString());
+                LogUtil.i("TAG", "郭传沛解析的数据" + result.toString());
                 mRequestListener.getData(result, pageIndex);
             }
 

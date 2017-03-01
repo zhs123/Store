@@ -1,7 +1,6 @@
 package com.b1502.store2.model;
 
 import com.b1502.store2.util.UrlUtil;
-import com.google.gson.annotations.SerializedName;
 
 /**
  * 1. 类的用途
@@ -11,53 +10,115 @@ import com.google.gson.annotations.SerializedName;
 
 public class Product {
 
-    @SerializedName("Id")
-    public String id;
+    private String ApplicationId;
+    private String CreateDateTime;
+    private String Id;
+    private String ImagePath;
+    private double MemberPrice;
+    private String Name;
+    private double Price;
+    private String ProductId;
+    private String PromotionLabel;
+    private String Unit;
 
-    @SerializedName("name")
-    public String name;
+    public String getApplicationId() {
+        return ApplicationId;
+    }
 
-    @SerializedName("Price")
-    public int price;
+    public void setApplicationId(String ApplicationId) {
+        this.ApplicationId = ApplicationId;
+    }
 
-    @SerializedName("CreateDateTime")
-    public String createDateTime;
+    public String getCreateDateTime() {
+        return CreateDateTime;
+    }
 
-    @SerializedName("Unit")
-    public String unit;
+    public void setCreateDateTime(String CreateDateTime) {
+        this.CreateDateTime = CreateDateTime;
+    }
 
-    @SerializedName("ProductId")
-    public String productId;
+    public String getId() {
+        return Id;
+    }
 
-    @SerializedName("ImagePath")
-    public String imagePath;
+    public void setId(String Id) {
+        this.Id = Id;
+    }
 
-    @SerializedName("MemberPrice")
-    public int memberPrice;
+    public String getImagePath() {
+        return ImagePath;
+    }
 
-    @SerializedName("ApplicationId")
-    public String applicationId;
+    public void setImagePath(String ImagePath) {
+        this.ImagePath = ImagePath;
+    }
 
-    @SerializedName("PromotionLabel")
-    public String promotionLabel;
+    public double getMemberPrice() {
+        return MemberPrice;
+    }
+
+    public void setMemberPrice(double MemberPrice) {
+        this.MemberPrice = MemberPrice;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String Name) {
+        this.Name = Name;
+    }
+
+    public double getPrice() {
+        return Price;
+    }
+
+    public void setPrice(double Price) {
+        this.Price = Price;
+    }
+
+    public String getProductId() {
+        return ProductId;
+    }
+
+    public void setProductId(String ProductId) {
+        this.ProductId = ProductId;
+    }
+
+    public String getPromotionLabel() {
+        return PromotionLabel;
+    }
+
+    public void setPromotionLabel(String PromotionLabel) {
+        this.PromotionLabel = PromotionLabel;
+    }
+
+    public String getUnit() {
+        return Unit;
+    }
+
+    public void setUnit(String Unit) {
+        this.Unit = Unit;
+    }
 
     public String getImgUrl() {
-        return UrlUtil.getImageUrl(imagePath);
+        return UrlUtil.getImageUrl(ImagePath);
     }
 
     @Override
     public String toString() {
         return "Product{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", createDateTime='" + createDateTime + '\'' +
-                ", unit='" + unit + '\'' +
-                ", productId='" + productId + '\'' +
-                ", imagePath='" + imagePath + '\'' +
-                ", memberPrice=" + memberPrice +
-                ", applicationId='" + applicationId + '\'' +
-                ", promotionLabel='" + promotionLabel + '\'' +
+                "ApplicationId='" + ApplicationId + '\'' +
+                ", CreateDateTime='" + CreateDateTime + '\'' +
+                ", Id='" + Id + '\'' +
+                ", ImagePath='" + ImagePath + '\'' +
+                ", MemberPrice=" + MemberPrice +
+                ", Name='" + Name + '\'' +
+                ", Price=" + Price +
+                ", ProductId='" + ProductId + '\'' +
+                ", PromotionLabel='" + PromotionLabel + '\'' +
+                ", Unit='" + Unit + '\'' +
                 '}';
     }
 }
+
