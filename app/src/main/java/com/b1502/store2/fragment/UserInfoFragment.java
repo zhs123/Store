@@ -138,26 +138,32 @@ public class UserInfoFragment extends BaseFragment implements View.OnClickListen
                 break;
             case R.id.user_info_myadd:
                 Intent intent_myadd = new Intent(getActivity(), AddActivity.class);
+                intent_myadd.putExtra("name","我的地址");
                 startActivity(intent_myadd);
                 break;
             case R.id.user_info_mycollect:
                 Intent intent_mycollect = new Intent(getActivity(), CollectActivity.class);
+                intent_mycollect.putExtra("name","我的收藏");
                 startActivity(intent_mycollect);
                 break;
             case R.id.user_info_mypoints:
                 Intent intent_mypoints = new Intent(getActivity(), PointsActivity.class);
+                intent_mypoints.putExtra("name","我的积分");
                 startActivity(intent_mypoints);
                 break;
             case R.id.user_info_mycoupon:
                 Intent intent_mycoupon = new Intent(getActivity(), CouponActivity.class);
+                intent_mycoupon.putExtra("name","我的优惠券");
                 startActivity(intent_mycoupon);
                 break;
             case R.id.user_info_accountsecurity:
                 Intent intent_accountsecurity = new Intent(getActivity(), AccountActivity.class);
+                intent_accountsecurity.putExtra("name","账户安全");
                 startActivity(intent_accountsecurity);
                 break;
             case R.id.user_info_quit:
                 Intent intent_quit = new Intent(getActivity(), QuitActivity.class);
+                intent_quit.putExtra("name","退出");
                 startActivity(intent_quit);
                 break;
         }
