@@ -4,31 +4,23 @@
     android:id="@+id/activity_particulars"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context="com.b1502.store2.activity.ParticularsActivity">
-    <LinearLayout
 
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="match_parent"
-        >
         <TextView
-            android:id="@+id/jump"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="返回"
-            android:textColor="#ffffff"
-            android:background="#E22018"
-            android:textSize="20sp"
-            />
+    android:id="@+id/jump"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="资讯详情"
+    android:textColor="#ffffff"
+    android:background="#E22018"
+    android:textSize="20sp"
+    android:paddingLeft="150dp"
+
+    />
 
 
-    </LinearLayout>
-    <!--<ListView
-        android:id="@+id/partctlars_listview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />-->
+
     <WebView
         android:id="@+id/webview"
         android:layout_width="wrap_content"
