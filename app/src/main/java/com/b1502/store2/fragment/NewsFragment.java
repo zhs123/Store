@@ -1,15 +1,19 @@
 package com.b1502.store2.fragment;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.b1502.store2.R;
+import com.b1502.store2.activity.ParticularsActivity;
 import com.b1502.store2.adapter.NewsAdapter;
 import com.b1502.store2.bean.NewsBean;
 import com.b1502.store2.model.StoreParams;
@@ -28,12 +32,13 @@ import java.util.List;
  * Use the {@link NewsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
 /**
-*1.类的用途
-*2.zhanghaisheng
-*3.2017/2/28
+ * 1.类的用途
+ * 2.zhanghaisheng
+ * 3.2017/2/28
  * 资讯页面
-**/
+ **/
 public class NewsFragment extends BaseFragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -47,7 +52,7 @@ public class NewsFragment extends BaseFragment {
     private ListView listview;
     private int i;
     private List<NewsBean> namelist;
-
+    private Context context;
 
     public NewsFragment() {
         // Required empty public constructor
@@ -85,7 +90,8 @@ public class NewsFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = View.inflate(getActivity(), R.layout.fragment_news, null);
-        listview =(ListView) view.findViewById(R.id.listview);
+        listview = (ListView) view.findViewById(R.id.listview);
+
         return view;
     }
 
@@ -102,10 +108,17 @@ public class NewsFragment extends BaseFragment {
             @Override
             public void onSuccess(String result) {
                 Log.i("MainActivity", "1scmcsndbdj" + result);
-                Gson gson=new Gson();
+                Gson gson = new Gson();
                 List<NewsBean> namelist = gson.fromJson(result, new TypeToken<List<NewsBean>>() {
                 }.getType());
-                listview.setAdapter(new NewsAdapter(namelist,getActivity()));
+                listview.setAdapter(new NewsAdapter(namelist, getActivity()));
+                listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent=new Intent(getActivity(), ParticularsActivity.class);
+                        getActivity().startActivity(intent);
+                    }
+                });
             }
 
             @Override
@@ -129,7 +142,6 @@ public class NewsFragment extends BaseFragment {
             }
         });
     }
-
 
 
 }
